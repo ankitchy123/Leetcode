@@ -11,7 +11,7 @@ public:
         }
         for (int i = 0; i < ransomNote.size(); i++)
         {
-            if (mp.find(ransomNote[i]) == mp.end() || mp[ransomNote[i]] == 0)
+            if (mp[ransomNote[i]] == 0)
             {
                 return false;
             }
