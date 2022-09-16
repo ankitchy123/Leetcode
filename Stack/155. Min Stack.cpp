@@ -18,7 +18,6 @@ public:
         }
         st.push({val, m});
     }
-
     void pop()
     {
         if (st.empty())
