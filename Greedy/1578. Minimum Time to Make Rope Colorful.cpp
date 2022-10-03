@@ -3,21 +3,24 @@ class Solution
 public:
     int minCost(string colors, vector<int> &neededTime)
     {
-        int i = 0, j = 0;
         int ans = 0;
+        int curr = neededTime[0], sum = neededTime[0];
 
-        while (i < neededTime.size() && j < neededTime.size())
+        for (int i = 1; i < neededTime.size(); i++)
         {
-            int curr = 0, sum = 0;
-            while (j < neededTime.size() && colors[i] == colors[j])
+            if (colors[i] != colors[i - 1])
             {
-                sum += neededTime[j];
-                curr = max(curr, neededTime[j]);
-                j++;
+                ans += sum - curr;
+                curr = neededTime[i];
+                sum = neededTime[i];
             }
-            ans += sum - curr;
-            i = j;
+            else
+            {
+                sum += neededTime[i];
+                curr = max(curr, neededTime[i]);
+            }
         }
+        ans += sum - curr;
         return ans;
     }
 };
