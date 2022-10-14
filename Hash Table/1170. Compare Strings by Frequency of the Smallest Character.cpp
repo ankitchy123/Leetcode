@@ -1,48 +1,58 @@
 class Solution
 {
 public:
+    int helper(string &word)
+    {
+        vector<int> arr(26, 0);
+        for (char &ch : word)
+        {
+            arr[ch - 'a']++;
+        }
+        for (int i = 0; i < 26; i++)
+        {
+            if (arr[i] != 0)
+            {
+                return arr[i];
+            }
+        }
+        return -1;
+    }
+
     vector<int> numSmallerByFrequency(vector<string> &queries, vector<string> &words)
     {
-        vector<int> q, w;
-        for (int i = 0; i < queries.size(); i++)
-        {
-            map<char, int> mp;
-
-            for (int j = 0; j < queries[i].size(); j++)
-            {
-                mp[queries[i][j]]++;
-            }
-
-            auto it = mp.begin();
-            q.push_back(it->second);
-        }
+        vector<int> ans;
+        vector<int> vec;
 
         for (int i = 0; i < words.size(); i++)
         {
-            map<char, int> mp;
-
-            for (int j = 0; j < words[i].size(); j++)
-            {
-                mp[words[i][j]]++;
-            }
-
-            auto it = mp.begin();
-            w.push_back(it->second);
+            int num = helper(words[i]);
+            vec.push_back(num);
         }
 
-        vector<int> ans;
-        for (int i = 0; i < q.size(); i++)
+        sort(vec.begin(), vec.end());
+        for (int i = 0; i < queries.size(); i++)
         {
-            int count = 0;
-            for (int j = 0; j < w.size(); j++)
+            int freq = helper(queries[i]);
+
+            int s = 0, e = vec.size() - 1;
+            int num = vec.size();
+
+            while (s <= e)
             {
-                if (q[i] < w[j])
+                int mid = s + (e - s) / 2;
+                if (vec[mid] > freq)
                 {
-                    count++;
+                    num = mid;
+                    e = mid - 1;
+                }
+                else
+                {
+                    s = mid + 1;
                 }
             }
-            ans.push_back(count);
+            ans.push_back(vec.size() - num);
         }
+
         return ans;
     }
 };
