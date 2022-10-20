@@ -35,16 +35,17 @@ public:
         vector<pair<int, int>> vec(lo);
         for (auto m : mem)
         {
-            vec.push_back({m.second, m.first});
+            vec.push_back({m.first, m.second});
         }
 
         sort(vec.begin(), vec.end(), [](pair<int, int> a, pair<int, int> b)
              {
-            if(a.first == b.first){
-                return a.second < b.second;
+            if(a.second == b.second)
+            {
+                return a.first < b.first;
             }
-            return a.first < b.first; });
+            return a.second < b.second; });
 
-        return vec[lo + k - 1].second;
+        return vec[lo + k - 1].first;
     }
 };
