@@ -4,21 +4,16 @@ public:
     int shortestSequence(vector<int> &rolls, int k)
     {
         map<int, int> mp;
-        int ans = 0, temp = 0;
+        int ans = 1;
         for (int i = 0; i < rolls.size(); i++)
         {
             mp[rolls[i]]++;
-            if (mp[rolls[i]] == 1)
+            if (mp.size() == k)
             {
-                temp++;
-            }
-            if (temp == k)
-            {
-                temp = 0;
                 mp.clear();
                 ans++;
             }
         }
-        return ans + 1;
+        return ans;
     }
 };
