@@ -31,20 +31,25 @@ class Solution
 public:
     void sortColors(vector<int> &nums)
     {
-        int count0 = 0, count1 = 0;
+        int low = 0, high = nums.size() - 1;
 
-        for (int i = 0; i < nums.size(); i++)
+        int mid = 0;
+        while (mid <= high)
         {
-            if (nums[i] == 0)
+            if (nums[mid] == 0)
             {
-                swap(nums[i], nums[count0 + count1]);
-                swap(nums[count0 + count1], nums[count0]);
-                count0++;
+                swap(nums[mid], nums[low]);
+                low++;
+                mid++;
             }
-            else if (nums[i] == 1)
+            else if (nums[mid] == 2)
             {
-                swap(nums[i], nums[count0 + count1]);
-                count1++;
+                swap(nums[mid], nums[high]);
+                high--;
+            }
+            else
+            {
+                mid++;
             }
         }
     }
