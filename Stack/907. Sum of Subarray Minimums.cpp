@@ -15,7 +15,7 @@ public:
                 int left = ind - (st.empty() ? -1 : st.top());
                 int right = i - ind;
 
-                ans += (long)(arr[ind] * left * right);
+                ans += (long)arr[ind] * left * right;
             }
             st.push(i);
         }
