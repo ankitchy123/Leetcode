@@ -14,7 +14,7 @@ class Solution
 public:
     void postorder(TreeNode *root, vector<int> &vec)
     {
-        if (root == NULL)
+        if (!root)
         {
             return;
         }
