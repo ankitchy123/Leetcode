@@ -12,30 +12,43 @@
 class Solution
 {
 public:
+    void solve(TreeNode *root, vector<int> &vec)
+    {
+        if (!root)
+        {
+            return;
+        }
+
+        solve(root->left, vec);
+        vec.push_back(root->val);
+        solve(root->right, vec);
+    }
+
     bool findTarget(TreeNode *root, int k)
     {
-        unordered_map<int, int> mp;
-        queue<TreeNode *> q;
-        q.push(root);
-
-        while (!q.empty())
+        if (!root)
         {
-            if (mp[k - q.front()->val])
+            return 0;
+        }
+        vector<int> vec;
+        solve(root, vec);
+
+        int i = 0, j = vec.size() - 1;
+        while (i < j)
+        {
+            if (vec[i] + vec[j] > k)
+            {
+                j--;
+            }
+            else if (vec[i] + vec[j] < k)
+            {
+                i++;
+            }
+            else
             {
                 return true;
             }
-            mp[q.front()->val] = 1;
-            if (q.front()->left != NULL)
-            {
-                q.push(q.front()->left);
-            }
-            if (q.front()->right != NULL)
-            {
-                q.push(q.front()->right);
-            }
-            q.pop();
         }
-
         return false;
     }
 };
