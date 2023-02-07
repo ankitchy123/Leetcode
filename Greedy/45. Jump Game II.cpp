@@ -3,14 +3,14 @@ class Solution
 public:
     int jump(vector<int> &nums)
     {
-        int ans = 0, end = 0, next = 0;
+        int ans = 0, temp = 0, next = 0;
         for (int i = 0; i < nums.size() - 1; i++)
         {
             next = max(next, i + nums[i]);
-            if (i == end)
+            if (i == temp)
             {
                 ans++;
-                end = next;
+                temp = next;
             }
         }
         return ans;
