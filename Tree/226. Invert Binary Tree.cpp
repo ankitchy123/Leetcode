@@ -14,16 +14,13 @@ class Solution
 public:
     TreeNode *invertTree(TreeNode *root)
     {
-        if (root == NULL)
+        if (!root)
         {
             return NULL;
         }
 
-        root->left = invertTree(root->left);
-        root->right = invertTree(root->right);
-
-        TreeNode *temp = root->left;
-        root->left = root->right;
+        TreeNode *temp = invertTree(root->left);
+        root->left = invertTree(root->right);
         root->right = temp;
 
         return root;
