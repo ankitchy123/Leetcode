@@ -1,7 +1,7 @@
 class Solution
 {
 public:
-    bool check(int mid, vector<int> price, int k)
+    bool check(int mid, vector<int> &price, int k)
     {
         int count = 1, last = price[0];
         for (int i = 1; i < price.size(); i++)
